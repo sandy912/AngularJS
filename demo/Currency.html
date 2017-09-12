@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Style.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Controller/Currency.js"></script>
+    <meta charset="utf-8" />
+</head>
+<body >
+    <div class="">
+        <div class="navbar navbar-default">
+            <div class="navbar-brand">
+                <a class="nounderline" href="Index.html">AngularJS Examples</a>
+            </div>
+        </div>
+    </div>
+    <div id="currency" ng-app="CurrencyApp">
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-8">
+                <div class="panel panel-info" ng-controller="ConvertCtrl">
+                    <div class="panel-heading">
+                        <h3 class="text-center">Currency Converter</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <p class="control-label">From</p>
+                                        <select ng-model="fromType" class="form-control" ng-change="Convert()" ng-options="k for (k, v) in rates track by v">                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <p class="control-label">To</p>
+                                        <select ng-model="toType" class="form-control" ng-change="Convert()" ng-options="k for (k, v) in rates track by v">                                 
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <p class="control-label">From Value</p>
+                                        <input type="number" class="form-control" placeholder="Enter value" ng-model="fromValue" ng-change="Convert()" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <p class="control-label">To Value</p>
+                                        <input type="text" class="form-control" ng-model="toValue" ng-disabled="true" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

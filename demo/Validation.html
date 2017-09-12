@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Style.css" rel="stylesheet" />
+    <script src="Scripts/angular.js"></script>
+    <script src="Controller/Validation.js"></script>
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div>
+        <div class="navbar navbar-default">
+            <div class="navbar-brand">
+                <a class="nounderline" href="Index.html">AngularJS Examples</a>
+            </div>
+        </div>
+    </div>
+    <div id="validation" class="container" ng-app="validationApp" ng-controller="mainController">
+        <div class="col-sm-offset-2 col-sm-8">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="text-center">AngularJS Form Validation</h3>
+                    
+                </div>
+
+                <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
+
+                    <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+                        <input type="text" name="name" class="form-control" placeholder="Name *" ng-model="name" required>
+                        <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your name is required.</p>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+                        <input type="text" name="username" class="form-control" ng-model="username" ng-minlength="3" ng-maxlength="8" placeholder="Username *" required>
+                        <p ng-show="userForm.username.$error.minlength" class="help-block">Username is too short.</p>
+                        <p ng-show="userForm.username.$error.maxlength" class="help-block">Username is too long.</p>
+                        <p ng-show="userForm.username.$error.required && !userForm.username.$pristine" class="help-block">Username is required.</p>
+
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+                        <input type="email" name="email" class="form-control" ng-model="email" placeholder="Email *" required>
+                        <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-success center-block btn-lg" ng-disabled="userForm.$invalid || userForm.email.$pristine|| userForm.email.$empty || userForm.email.$invalid|| userForm.username.$invalid || userForm.username.$error.minlength || userForm.username.$error.maxlength">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

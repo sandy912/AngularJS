@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Style.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/angular.js"></script>
+	<meta charset="utf-8" />
+</head>
+<body style="background-color: #FF7F66;">
+    <div class="">
+        <div class="navbar navbar-default">
+            <div class="navbar-brand">
+                <a class="nounderline" href="Index.html">AngularJS Examples</a>
+            </div>
+        </div>
+    </div>
+    <div id="welcome" ng-app="">
+        <h2 class="welcome text-capitalize" >Hello {{name}}!</h2><br /><br />
+        <input class="welcome-input" type="text" ng-model="name" placeholder="Enter your name">
+    </div>
+</body>
+</html>

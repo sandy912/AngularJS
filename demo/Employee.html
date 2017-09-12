@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/Style.css" rel="stylesheet" />
+    <title>Employee Database</title>    
+    <script src="Scripts/jquery-3.1.1.min.js"></script>    
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Controller/Employee.js"></script>
+    <meta charset="utf-8" />
+</head>
+<body ng-app="App" ng-controller="EmployeeCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr />
+                <h3 class="text-center">Employee Database</h3>
+                <hr />
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                
+                    <input class="form-control" ng-model="searchText" placeholder="Search...." type="search" ng-change="search()" /><br />
+                    <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#addModal">Add Employee</button>
+                
+                <div class="alert alert-warning fade in myAlert" style="margin-top:30px;" ng-if="alertMassege">
+                    <a class="close" href="#" data-dismiss="alert" ng-click="clickedAlert()">×</a>
+                    <h4>{{alertMassege}}</h4>
+                </div>
+                <table class="table table-bordered" style="margin-top:30px;">
+                    <thead>
+                        <tr class="text-center">
+                            <th ng-repeat="(k, v) in head" ng-class="selectedCls(i)" ng-click="changeSorting(i)">{{v}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in users | filter: searchText">
+                            <td>{{$index+1}}</td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.empid}}</td>
+                            <td>{{user.email}}</td>
+                            <td>
+                                <button class="btn btn-warning" data-toggle="modal" data-target="#editModal" ng-click="selectUser(user)">Edit</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" ng-click="selectUser(user)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Modal-->
+    <div class="modal fade" id="addModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Add New</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Name">Name</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text" placeholder="Enter Name" ng-model="newUser.name" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="empid">Employee Id</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="number" placeholder="Enter Employee Id" ng-model="newUser.empid" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="email">Email</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="email" placeholder="Enter Email" ng-model="newUser.email" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="button" ng-click="saveUser()" data-dismiss="modal">Save</button>
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Modal-->
+    <div class="modal fade" id="editModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Edit</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="Name">Name</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="text" ng-model="clickedUser.name" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="empid">Employee Id</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="number" ng-model="clickedUser.empid" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="email">Email</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" type="email" ng-model="clickedUser.email" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="button" ng-click="updateUser()" data-dismiss="modal">Save</button>
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Modal-->
+    <div class="modal fade" id="deleteModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Delete</h4>
+                </div>
+                <div class="modal-body">
+                    <h3>Are you sure to delete <span>{{clickedUser.name}}</span>????</h3>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" type="button" ng-click="deleteUser()" data-dismiss="modal">Yes</button>
+                    <button class="btn btn-primary" type="button" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/Style.css" rel="stylesheet" />
+    <title>Angular Js App</title>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Controller/Index.js"></script>
+	<meta charset="utf-8" />
+</head>
+<body ng-app="IndexApp" ng-controller="IndexCtrl">
+    <div class="">
+        <div class="navbar navbar-default">
+            <div class="navbar-brand">
+                <a class="nounderline" href="Index.html">AngularJS Examples</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">      
+           
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3" ng-repeat="app in apps" >                 
+                     <div class="pic" style="background-color:{{app.bgcolor}}">
+                         <h2 class="title" style="color:white">{{app.title}}</h2>
+                     </div>
+                     <div class="desc">
+                         {{app.desc}}
+                     </div>
+                     <div class="openapp">
+                       <a class="btn btn-default" href="{{app.link}}">Open App</a>
+                     </div>                  
+                </div>
+                   
+    </div>
+</body>
+</html>

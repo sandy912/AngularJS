@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Style.css" rel="stylesheet" />
+    <title>Angular Js App</title>
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Controller/Todo.js"></script>
+    <meta charset="utf-8" />
+</head>
+<body id="todo">
+    <div class="">
+        <div class="navbar navbar-default">
+            <div class="navbar-brand">
+                <a class="nounderline" href="Index.html">AngularJS Examples</a>
+            </div>
+        </div>
+    </div>
+    <div class="container" ng-app="App" ng-controller="TasksController">
+        <div class="panel panel-warning todocontainer">
+            <div class="panel-heading">
+                <h3 class="text-center">Todo App</h3>
+            </div>
+            <div class="panel-body">
+                <form ng-submit="add(newTask)">
+                        <h3>Add new task</h3>
+                        <input type="text" class="form-control" placeholder="Type a task and hit enter" ng-model="newTask" />                 
+                </form>
+                <h3>Remaining <small>- {{tasks.length}} / {{getTotalTasks()}} ({{calculatePercent(tasks.length)}}%)</small></h3>
+                <ul>
+                    <li class="list-unstyled list-group-item" ng-repeat="task in tasks">{{task}}<a ng-click="markAsComplete($index)">
+                        <span class="glyphicon glyphicon-ok pull-right"> </span></a>
+                    </li>
+                </ul>
+                <h3>Completed <small>- {{completedTasks.length}} / {{getTotalTasks()}} ({{calculatePercent(completedTasks.length)}}%)</small></h3>
+                <ul>
+                    <li class="list-unstyled list-group-item" ng-repeat="task in completedTasks"><del>{{task}}</del>
+                    <a ng-click="delete($index)"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+                    <a ng-click="markAsIncomplete($index)"><span class="glyphicon glyphicon-repeat pull-right">&nbsp;</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
